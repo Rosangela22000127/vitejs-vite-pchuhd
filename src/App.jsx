@@ -25,6 +25,11 @@ function App() {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
   };
+
+  const handleDeleteAllTasks = () => {
+    setTasks([]);
+  };
+
   const style = {
     py: 0,
     width: '100%',
@@ -40,6 +45,9 @@ function App() {
     <div>
       <Typography variant="h4" gutterBottom>
         Mini Task Dashboard
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        Tareas pendientes: {tasks.length}
       </Typography>
       <div
         style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}
@@ -70,13 +78,21 @@ function App() {
               onClick={() => handleDeleteTask(index)}
               aria-label="delete"
             >
-              <Button variant="outlined" startIcon={<DeleteIcon />}>
-                Delete
-              </Button>
+              <DeleteIcon />
             </IconButton>
           </ListItem>
         ))}
       </List>
+      {tasks.length > 0 && (
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleDeleteAllTasks}
+          style={{ marginTop: '10px' }}
+        >
+          Delete All
+        </Button>
+      )}
     </div>
   );
 }
